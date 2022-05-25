@@ -1,0 +1,25 @@
+h1{
+    text-align: center;
+  }
+  #tabell{
+      border-bottom: thick;
+  }
+  #tabell, tr , td, th{
+     border-collapse: collapse;
+      border: 1px solid black;
+  }
+  .bord{
+      border: 2px solid black;
+  }
+  .bord2{
+      border-bottom: 2px solid black;
+  }
+  #alt{
+      display: flex;
+      justify-content: space-around;
+      width: 60%;
+  }
+  #terning{
+      display: grid;
+      gap: 5px;  
+  }
