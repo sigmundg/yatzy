@@ -51,8 +51,13 @@ function throwDice() {
 
     //Dersom siste spiller er ferdig skal ny rad startes;
     if (numberOfPlayers == currentPlayer) {
-      currentRow = currentRow +1;
-      currentPlayer = 1;
+      currentPlayer = 1;     
+      if (currentRow == 6) {
+        //Hopper over sum (rad 7) og bonues (rad 8)
+        currentRow = 9;
+      } else {
+        currentRow = currentRow +1;
+      }
     } else {
       //Hvis ikke er det neste spiller sin tur
       currentPlayer++;
@@ -63,18 +68,16 @@ function throwDice() {
   for (let i = 1; i <= 5; i++) {
     //Sjekk om terning skal beholdes;
     var keep = document.getElementById("keep"+i);
-    console.log(keep.checked);
     if (keep.checked == false) {
       //Kaster bare terning dersom keep ikke er krysset av 
       var currentDice = throwOneDice();
       var ter = document.getElementById("terning"+i);
       ter.src = "terning"+currentDice+".png"
-    }
       //Oppdaterer array med terninger. Arrayer starter på 0 (trekker fra en)
       currentDices[i-1] = currentDice;
-
-      
+    }      
   }
+  console.log(currentDices);
   //Teller ned antall kast som er igjen
   throwsLeft = throwsLeft - 1;
   if (throwsLeft == 0) {
@@ -92,20 +95,22 @@ function finishRound() {
   document.getElementById("p"+currentPlayer+"-"+currentRow).innerHTML = sumRow;
 
   if (currentRow == 6) {
-    console.log("LAST ROUND + SUM");
+    console.log("LAST ROUND + SUM " + currentPlayer);
     //Beregner Sum 1 
-    currentRow++;
+    
     var sum1 = calculateSum1(currentPlayer, currentBoard);
-    currentBoard[currentRow-1][currentPlayer-1] = sum1;  
-    document.getElementById("p"+currentPlayer+"-"+currentRow).innerHTML = sum1;
+    currentBoard[currentRow][currentPlayer-1] = sum1;  
 
-    currentRow++;
+    document.getElementById("p"+currentPlayer+"-sum").innerHTML = sum1;
+
+    
     var bonus = 0;
     //Beregner bonus
     if (sum1 >= 63) {
       bonus = 50;
     }
-    document.getElementById("p"+currentPlayer+"-"+currentRow).innerHTML = bonus;
+    currentBoard[currentRow+1][currentPlayer-1] = bonus;
+    document.getElementById("p"+currentPlayer+"-bonus").innerHTML = bonus;
   }
   displayBoard(currentBoard);
 }
@@ -120,7 +125,7 @@ function calculateScoreForRow(currentRow) {
     valueForRow = calculateDice(currentRow);
   }
 
-  console.log(valueForRow);
+  console.log("Value for row = " + valueForRow + "(" + currentRow +", " + currentPlayer+")");
   return valueForRow;
 }
 
@@ -138,6 +143,17 @@ function calculateDice(dice) {
 }
 
 /* ************************************************************************
+  Beregner sum for terning 1 til 6
+*/
+function calculateSum1(player, board) {
+  var sum1 = 0;
+  for (let i = 1; i <= 6; i++) {
+    sum1 = sum1 + board[i-1][player - 1];
+  }
+  return sum1;
+}
+
+/* ************************************************************************
  * Nullstiller terningene
 */
 function clearDices() {
@@ -150,15 +166,5 @@ function clearDices() {
   throwsLeft = 3;
 }
 
-/* ************************************************************************
-  Beregner sum for terning 1 til 6
-*/
-function calculateSum1(player, board) {
-  var sum1 = 0;
-  for (let i = 1; i <= 6; i++) {
-    console.log(board[i-1][player - 1])
-    sum1 = sum1 + board[i-1][player - 1];
-  }
-  return sum1;
-}
+
 
