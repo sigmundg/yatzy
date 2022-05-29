@@ -37,17 +37,6 @@ function initializeBoard() {
 }
 
 /* ************************************************************************
- Skriver ut brettet på konsollet. Fint for å debugge :-)
- */
- function displayBoard(board) {
-   console.log("*****************");
-   for (let i = 0; i < board.length; i++) {
-     console.log(board[i]);
-   }
-   console.log("*****************");
-}
-
-/* ************************************************************************
   Returnerer en verdi mellom 1 og 6
 */
 function throwOneDice() {
@@ -126,7 +115,6 @@ function finishRound() {
     currentBoard[currentRow+1][currentPlayer-1] = bonus;
     document.getElementById("p"+currentPlayer+"-bonus").innerHTML = bonus;
   }
-  displayBoard(currentBoard);
 }
 
 /* ************************************************************************
