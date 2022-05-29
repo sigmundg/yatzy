@@ -9,6 +9,13 @@
 </head>
 <body>
     <h1>--= YATZY =--</h1>
+    <div>
+        <button id="velg1" onclick="setPlayers(1)">1 Spiller</button>
+        <button id="velg2" onclick="setPlayers(2)">2 Spillere</button>
+        <button id="velg3" onclick="setPlayers(3)">3 Spillere</button>
+        <button id="velg4" onclick="setPlayers(4)">4 Spillere</button>
+    </div>
+
     <div id="alt">
     <div>
         <table id="tabell">
@@ -158,7 +165,7 @@
     </div>
 </div>
     <div>
-        <button id="knapp" onclick="throwDice()">Fortsett</button>
+        <button id="knapp" onclick="throwDice()" disabled>Fortsett</button>
     </div>
 
 </body>

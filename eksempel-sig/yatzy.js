@@ -1,13 +1,27 @@
 
 //Variabler for hele spillet
-var numberOfPlayers = 2;
+var numberOfPlayers = 4;
 var currentPlayer = 1;
 var currentRow = 1;
 var throwsLeft = 3;
-var currentDices = [0, 0, 0, 0, 0];
+var currentDices = new Array(5); //[0, 0, 0, 0, 0];
 //Bruker en 2 dimensjonal array som representasjon for brettet. 
 //Første dimentsjon er rad, andre er spilleren
 var currentBoard = initializeBoard();
+
+
+function setPlayers(spiller) {
+  console.log(spiller);
+  numberOfPlayers = spiller;
+  
+  document.getElementById("knapp").disabled = false;
+
+  document.getElementById("velg1").disabled = true;
+  document.getElementById("velg2").disabled = true;
+  document.getElementById("velg3").disabled = true;
+  document.getElementById("velg4").disabled = true;
+  
+}
 
 /* ************************************************************************
   Klargjør en representasjon av brettet
